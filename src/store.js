@@ -7,11 +7,10 @@ export function reducer(state, action = {}) {
 
   switch(action.type){
     case 'MESSAGES_LOADING_FULFILLED':
-      console.log("hello");
       return Object.assign({}, state, {  isLoading: false, messages: action.payload });
 
-    case 'MEMBERS_LOADING':
-      return Object.assign({}, state, { messages: action.payload });
+    case 'MEMBERS_LOADING_FULFILLED':
+      return Object.assign({}, state, { isLoading: false, members: action.payload });
     default: 
       return state;
   }
