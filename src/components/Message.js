@@ -15,13 +15,25 @@ class Message extends React.Component{
         
       }
     
-      toggleHoverState(state) {
+    toggleHoverState(state) {
         return {
           isHovering: !state.isHovering,
         };
-      }
+    }
 
+   
     render() {
+        if(this.props.member.avatar != null){
+            return (
+            <div>
+                <img src={this.props.member.avatar} alt="avatar" height="42" width="42"></img>
+                 <p onMouseEnter={this.handleMouseHover} onMouseLeave={this.handleMouseHover}>{this.props.message} </p>
+                  {this.state.isHovering && <div>{this.props.member.email}</div>}
+            </div>
+
+               
+            );
+        }
         return (
             <div>
               
