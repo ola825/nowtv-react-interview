@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {getChatLog, getMembersList} from '../service';
 import {bindActionCreators} from 'redux';
 import Message from '../components/Message';
-
+import moment from 'moment'
 
 
 
@@ -16,6 +16,9 @@ class MessageList extends React.Component{
        
     }
 
+    convertTimestamp(timestamp){
+        return moment(timestamp, 'YYYY.MM.DD' ).format('LLLL');
+    }
 
     findMemberById(id){
         return this.props.members.find(function (member) { return member.id === id; }) 
@@ -29,7 +32,7 @@ class MessageList extends React.Component{
     render() {
         
 
-        if(this.props.isLoading != false){
+        if(this.props.isLoading !== false){
             return <div>
                 <p> Messages Loading...</p>
                 </div>
@@ -42,11 +45,10 @@ class MessageList extends React.Component{
             
            <ul>
                
-               {console.log(this.props)}
                {/* {this.findMessageById("b03569ae-ccbf-4975-8040-4daba638b407")} */}
                 {this.props.messages.map((message) => (
                     
-                    <Message key={message.id} message={message.message} member={this.findMemberById(message.userId)} />
+                    <Message key={message.id} message={message.message} datetime={this.convertTimestamp(message.timestamp)} member={this.findMemberById(message.userId)} />
                     
                 ))}
             </ul>
